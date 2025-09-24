@@ -17,6 +17,7 @@ import {
   Filler,
 } from "chart.js";
 import { Line } from "react-chartjs-2";
+import type { ChartData, ChartOptions, ScriptableContext, ChartArea } from 'chart.js';
 
 ChartJS.register(
   CategoryScale,
@@ -37,17 +38,18 @@ export function EQGraph({ isBassHeavy }: EQGraphProps) {
   const flatData = [0, 0, 0, 0, 0, 0];
   const bassHeavyData = [12, 10, 4, -6, -8, -12];
 
-  const data = {
+  const data: ChartData<'line'> = {
     labels: ["60Hz", "150Hz", "250Hz", "1kHz", "4kHz", "15kHz"],
     datasets: [
       {
         label: "EQ Levels",
         data: isBassHeavy ? bassHeavyData : flatData,
         fill: true,
-        backgroundColor: (context: any) => {
+        backgroundColor: (context: ScriptableContext<'line'>): CanvasGradient | string | undefined => {
           const chart = context.chart;
-          const { ctx, chartArea } = chart;
-          if (!chartArea) return;
+          const ctx: CanvasRenderingContext2D | undefined = chart?.ctx;
+          const chartArea: ChartArea | undefined = chart?.chartArea;
+          if (!ctx || !chartArea) return;
           const g = ctx.createLinearGradient(0, chartArea.top, 0, chartArea.bottom);
           g.addColorStop(0, "rgba(0,0,0,0.8)");
           g.addColorStop(1, "rgba(0,0,0,0.1)");
@@ -63,7 +65,7 @@ export function EQGraph({ isBassHeavy }: EQGraphProps) {
     ],
   };
 
-  const options = {
+  const options: ChartOptions<'line'> = {
     responsive: true,
     plugins: { legend: { display: false } },
     scales: {
@@ -83,7 +85,7 @@ export function EQGraph({ isBassHeavy }: EQGraphProps) {
     },
   };
 
-  return <Line data={data as any} options={options as any} />;
+  return <Line data={data} options={options} />;
 }
 
 // =================== PAGE ===================
@@ -112,8 +114,10 @@ export default function Page() {
       try {
         const res = await fetch("/OFF_deaf_eq.mp3");
         const arrayBuffer = await res.arrayBuffer();
-        const ctx = new (window.AudioContext ||
-          (window as any).webkitAudioContext)();
+        const ctx = new (
+          window.AudioContext ||
+          ('webkitAudioContext' in window ? (window as typeof window & { webkitAudioContext: typeof AudioContext }).webkitAudioContext : undefined)
+        )();
         if (!mounted) return;
         audioContextRef.current = ctx;
 
