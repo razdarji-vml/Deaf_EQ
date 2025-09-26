@@ -3,8 +3,12 @@
 import { useRef, useState, useEffect } from "react";
 import { motion, useSpring } from "framer-motion";
 import Image from "next/image";
+import { Jersey_25 } from 'next/font/google';
 
 // ===== Chart.js bits (same API as your manager's) =====
+
+const jersey25 = Jersey_25({ subsets: ['latin'], weight: '400' });
+
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -210,7 +214,7 @@ export default function Page() {
   }, []);
 
   return (
-    <main
+    <main className={jersey25.className}
       style={{
         minHeight: "100vh",
         display: "grid",
@@ -225,17 +229,17 @@ export default function Page() {
         className="flex flex-col items-center justify-center text-center gap-6 mb-8 px-2"
       >
         <h1
-          className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-gray-300 leading-tight m-0 text-center"
+          className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-blue-300 leading-tight m-0 text-center"
         >
           DEAF EQ<br />SIMULATOR
         </h1>
         <motion.p
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4 }}
+          transition={{ duration: 0.8 }}
           className="text-base sm:text-lg md:text-xl font-bold m-0 text-center"
         >
-          AN EQ SETTING THAT IS OPTIMISED FOR<br />DEAF PEOPLE
+          AN EQ SETTING OPTIMISED FOR<br />DEAF PEOPLE
         </motion.p>
       </header>
 
