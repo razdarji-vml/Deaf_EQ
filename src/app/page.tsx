@@ -231,7 +231,7 @@ export default function Page() {
         <h1
           className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-blue-300 leading-tight m-0 text-center"
         >
-          DEAF EQ<br />SIMULATOR
+          FEEL EQ<br />SIMULATOR
         </h1>
         <motion.p
           initial={{ opacity: 0, y: 10 }}
@@ -312,7 +312,7 @@ export default function Page() {
           className="font-extrabold text-base sm:text-lg"
           style={{ color: "#8E5BFF", opacity: eqOn ? 1 : 0.5 }}
         >
-          Deaf EQ
+          FEEL EQ
         </span>
       </footer>
     </main>
