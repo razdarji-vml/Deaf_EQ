@@ -202,19 +202,9 @@ export default function Page() {
     setIsPlaying(true);
   };
 
-  // Responsive toggle position
-  const [toggleRight, setToggleRight] = useState(125);
-  useEffect(() => {
-    function handleResize() {
-      setToggleRight(window.innerWidth < 640 ? 100 : 125);
-    }
-    handleResize();
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
 
   return (
-    <main className={`${jersey25.className} min-h-screen flex flex-col items-center justify-between p-24`}
+    <main className={`${jersey25.className} min-h-screen flex flex-col items-center justify-between px-6 py-10 sm:px-12 sm:py-16 lg:px-24 lg:py-24`}
     >
       {/* Header */}
       <header
@@ -296,7 +286,7 @@ export default function Page() {
             style={{
               position: "absolute",
               top: 6,
-              left: eqOn ? toggleRight : 6,
+              left: eqOn ? "calc(100% - 50px)" : 6,
               width: 44,
               height: 44,
               borderRadius: 999,
@@ -307,7 +297,7 @@ export default function Page() {
         </button>
         <span
           className="font-extrabold text-base sm:text-lg"
-          style={{ color: "#FFFFFF", opacity: eqOn ? 1 : 0.5 }}
+          style={{ color: "#FFFFF", opacity: eqOn ? 1 : 0.5 }}
         >
           FEEL EQ
         </span>
