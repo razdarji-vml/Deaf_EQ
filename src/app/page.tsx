@@ -55,16 +55,16 @@ export function EQGraph({ isBassHeavy }: EQGraphProps) {
           const chartArea: ChartArea | undefined = chart?.chartArea;
           if (!ctx || !chartArea) return;
           const g = ctx.createLinearGradient(0, chartArea.top, 0, chartArea.bottom);
-          g.addColorStop(0, "rgba(0,0,0,0.8)");
-          g.addColorStop(1, "rgba(0,0,0,0.1)");
+          g.addColorStop(0, "rgba(255,255,255,0.8)");
+          g.addColorStop(1, "rgba(255,255,255,0.1)");
           return g;
         },
-        borderColor: "#000",
+        borderColor: "#fff",
         borderWidth: 2,
         tension: 0.4,
         pointRadius: 4,
-        pointBackgroundColor: "#000",
-        pointBorderColor: "#000",
+        pointBackgroundColor: "#fff",
+        pointBorderColor: "#fff",
       },
     ],
   };
@@ -76,15 +76,15 @@ export function EQGraph({ isBassHeavy }: EQGraphProps) {
       y: {
         min: -12,
         max: 12,
-        grid: { color: "rgba(0,0,0,0.2)" },
+        grid: { color: "rgba(255,255,255,0.2)" },
         ticks: {
-          color: "#000",
+          color: "#fff",
           callback: (v: string | number) => `${v} dB`,
         },
       },
       x: {
-        grid: { color: "rgba(0,0,0,0.2)" },
-        ticks: { color: "#000" },
+        grid: { color: "rgba(255,255,255,0.2)" },
+        ticks: { color: "#fff" },
       },
     },
   };
@@ -214,24 +214,21 @@ export default function Page() {
   }, []);
 
   return (
-    <main className={jersey25.className}
-      style={{
-        minHeight: "100vh",
-        display: "grid",
-        gridTemplateRows: "auto 1fr auto",
-        background: "#ECECEC",
-        color: "#111",
-        padding: "2.5rem",
-      }}
+    <main className={`${jersey25.className} min-h-screen flex flex-col items-center justify-between p-24`}
     >
       {/* Header */}
       <header
         className="flex flex-col items-center justify-center text-center gap-6 mb-8 px-2"
       >
         <h1
-          className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-blue-300 leading-tight m-0 text-center"
+          className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-white leading-tight m-0 text-center"
         >
-          FEEL EQ<br />SIMULATOR
+          <span className="block mx-auto w-[12ch] sm:w-[14ch] md:w-[16ch] text-4xl sm:text-6xl md:text-7xl">
+            FEEL EQ
+          </span>
+          <span className="block mx-auto w-[12ch] sm:w-[14ch] md:w-[16ch]">
+            SIMULATOR
+          </span>
         </h1>
         <motion.p
           initial={{ opacity: 0, y: 10 }}
@@ -250,7 +247,7 @@ export default function Page() {
 
       {/* Play Track Card - responsive, always single row */}
       <div className="flex items-center justify-center w-full px-2 mb-6">
-        <div className="flex flex-row items-center justify-between bg-gray-200 p-2 sm:p-3 rounded-md w-full max-w-md gap-x-3">
+        <div className="flex flex-row items-center justify-between bg-white p-2 sm:p-3 rounded-md w-full max-w-md gap-x-3">
           <div className="flex items-center space-x-2 sm:space-x-3 w-auto">
             <Image
               src="/Kendrick_Lamar_-_Not_Like_Us.png"
@@ -310,7 +307,7 @@ export default function Page() {
         </button>
         <span
           className="font-extrabold text-base sm:text-lg"
-          style={{ color: "#8E5BFF", opacity: eqOn ? 1 : 0.5 }}
+          style={{ color: "#FFFFFF", opacity: eqOn ? 1 : 0.5 }}
         >
           FEEL EQ
         </span>
