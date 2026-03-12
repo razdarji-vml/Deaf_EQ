@@ -157,7 +157,7 @@ export default function Page() {
       mounted = false;
       try {
         sourceRef.current?.stop();
-      } catch {}
+      } catch { }
       audioContextRef.current?.close();
     };
   }, []);
@@ -184,7 +184,7 @@ export default function Page() {
     if (isPlaying) {
       try {
         sourceRef.current?.stop();
-      } catch {}
+      } catch { }
       sourceRef.current = null;
       setIsPlaying(false);
       return;
@@ -206,9 +206,19 @@ export default function Page() {
   return (
     <main className={`${jersey25.className} min-h-screen flex flex-col items-center justify-between px-6 py-10 sm:px-12 sm:py-16 lg:px-24 lg:py-24`}
     >
+      {/* Navigation */}
+      <nav className="absolute top-6 right-6 sm:top-10 sm:right-12">
+        <button
+          onClick={() => document.getElementById('how-it-works')?.scrollIntoView({ behavior: 'smooth' })}
+          className="text-sm sm:text-base font-bold text-white/80 hover:text-white transition-colors bg-white/10 px-4 py-2 rounded-full backdrop-blur-sm border border-white/20"
+        >
+          How it works?
+        </button>
+      </nav>
+
       {/* Header */}
       <header
-        className="flex flex-col items-center justify-center text-center gap-6 mb-8 px-2"
+        className="flex flex-col items-center justify-center text-center gap-2 mb-8 px-2"
       >
         <h1
           className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-white leading-tight m-0 text-center"
@@ -236,7 +246,7 @@ export default function Page() {
       </section>
 
       {/* Play Track Card - responsive, always single row */}
-      <div className="flex items-center justify-center w-full px-2 mb-6">
+      <div className="flex items-center justify-center w-full px-2 mb-6 p-12">
         <div className="flex flex-row items-center justify-between bg-white p-2 sm:p-3 rounded-md w-full max-w-md gap-x-3">
           <div className="flex items-center space-x-2 sm:space-x-3 w-auto">
             <Image
@@ -267,9 +277,7 @@ export default function Page() {
       </div>
 
       {/* Toggle row - responsive */}
-      <footer
-        className="flex justify-center items-center gap-4 pb-6 px-2 w-full"
-      >
+      <div className="flex justify-center items-center gap-4 pb-6 px-2 w-full">
         <span className="text-base sm:text-lg" style={{ opacity: eqOn ? 0.4 : 1 }}>Normal EQ</span>
         <button
           aria-pressed={eqOn}
@@ -301,7 +309,16 @@ export default function Page() {
         >
           FEEL EQ
         </span>
-      </footer>
+      </div>
+      <div id="how-it-works" className="flex justify-start items-center gap-4 pb-6 px-2 w-full mt-56">
+        <header>
+          <h2 className="text-5xl font-bold text-black mb-2">HOW IT WORKS?</h2>
+          <p className="text-2xl sm:text-2xl text-black">This is a Early prototype for a EQ setting <br /> that is optimised for Deaf people</p>
+        </header>
+      </div>
+      <div className="flex flex-col items-center justify-center">
+
+      </div>
     </main>
   );
 }
